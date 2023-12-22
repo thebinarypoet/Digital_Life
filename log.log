@@ -1,0 +1,173 @@
+2023-12-22 09:38:15,073 INFO Initializing Server...
+2023-12-22 09:38:15,086 INFO Initializing ASR Service...
+2023-12-22 09:38:15,299 ERROR ASR\resources\models\model.onnx does not exists.
+2023-12-22 09:38:15,304 ERROR Traceback (most recent call last):
+  File "C:\experiment\Ai_project\Digital_Life_Server-master\SocketServer.py", line 204, in <module>
+    s = Server(args)
+  File "C:\experiment\Ai_project\Digital_Life_Server-master\SocketServer.py", line 88, in __init__
+    self.paraformer = ASRService.ASRService('./ASR/resources/config.yaml')
+  File "C:\experiment\Ai_project\Digital_Life_Server-master\ASR\ASRService.py", line 10, in __init__
+    self.paraformer = RapidParaformer(config_path)
+  File "C:\experiment\Ai_project\Digital_Life_Server-master\ASR\rapid_paraformer\rapid_paraformer.py", line 31, in __init__
+    self.ort_infer = OrtInferSession(config['Model'])
+  File "C:\experiment\Ai_project\Digital_Life_Server-master\ASR\rapid_paraformer\utils.py", line 290, in __init__
+    self._verify_model(config['model_path'])
+  File "C:\experiment\Ai_project\Digital_Life_Server-master\ASR\rapid_paraformer\utils.py", line 329, in _verify_model
+    raise FileNotFoundError(f'{model_path} does not exists.')
+FileNotFoundError: ASR\resources\models\model.onnx does not exists.
+
+2023-12-22 09:39:04,535 INFO Initializing Server...
+2023-12-22 09:39:04,548 INFO Initializing ASR Service...
+2023-12-22 09:39:18,856 INFO Initializing ChatGPT Service...
+2023-12-22 09:39:18,858 INFO chatGPT prompt: catmaid35.txt
+2023-12-22 09:39:19,656 INFO machine identifier: F4:7B:09:13:71:BC
+2023-12-22 09:39:21,440 INFO you have your own api key. Great.
+2023-12-22 09:39:25,435 INFO API Chatbot initialized.
+2023-12-22 09:39:25,437 INFO Initializing TTS Service for character_catmaid...
+2023-12-22 09:39:25,439 ERROR [Errno 2] No such file or directory: 'TTS/models/catmix.json'
+2023-12-22 09:39:25,442 ERROR Traceback (most recent call last):
+  File "C:\experiment\Ai_project\Digital_Life_Server-master\SocketServer.py", line 204, in <module>
+    s = Server(args)
+  File "C:\experiment\Ai_project\Digital_Life_Server-master\SocketServer.py", line 94, in __init__
+    self.tts = TTService.TTService(*self.char_name[args.character])
+  File "C:\experiment\Ai_project\Digital_Life_Server-master\TTS\TTService.py", line 35, in __init__
+    self.hps = utils.get_hparams_from_file(cfg)
+  File "C:\experiment\Ai_project\Digital_Life_Server-master\TTS\vits\utils.py", line 186, in get_hparams_from_file
+    with open(config_path, "r") as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'TTS/models/catmix.json'
+
+2023-12-22 09:40:34,921 INFO Initializing Server...
+2023-12-22 09:40:34,935 INFO Initializing ASR Service...
+2023-12-22 09:40:48,318 INFO Initializing ChatGPT Service...
+2023-12-22 09:40:48,321 INFO chatGPT prompt: catmaid35.txt
+2023-12-22 09:40:49,075 INFO machine identifier: F4:7B:09:13:71:BC
+2023-12-22 09:40:50,420 INFO you have your own api key. Great.
+2023-12-22 09:40:54,301 INFO API Chatbot initialized.
+2023-12-22 09:40:54,303 INFO Initializing TTS Service for character_catmaid...
+2023-12-22 09:40:58,638 ERROR 
+2023-12-22 09:40:58,641 ERROR Traceback (most recent call last):
+  File "C:\experiment\Ai_project\Digital_Life_Server-master\SocketServer.py", line 204, in <module>
+    s = Server(args)
+  File "C:\experiment\Ai_project\Digital_Life_Server-master\SocketServer.py", line 94, in __init__
+    self.tts = TTService.TTService(*self.char_name[args.character])
+  File "C:\experiment\Ai_project\Digital_Life_Server-master\TTS\TTService.py", line 43, in __init__
+    _ = utils.load_checkpoint(model, self.net_g, None)
+  File "C:\experiment\Ai_project\Digital_Life_Server-master\TTS\vits\utils.py", line 19, in load_checkpoint
+    assert os.path.isfile(checkpoint_path)
+AssertionError
+
+2023-12-22 09:43:32,107 INFO Initializing Server...
+2023-12-22 09:43:32,118 INFO Initializing ASR Service...
+2023-12-22 09:43:45,374 INFO Initializing ChatGPT Service...
+2023-12-22 09:43:45,377 INFO chatGPT prompt: catmaid35.txt
+2023-12-22 09:43:46,141 INFO machine identifier: F4:7B:09:13:71:BC
+2023-12-22 09:43:47,468 INFO you have your own api key. Great.
+2023-12-22 09:43:51,569 INFO API Chatbot initialized.
+2023-12-22 09:43:51,572 INFO Initializing TTS Service for character_catmaid...
+2023-12-22 09:43:55,602 INFO Initializing Sentiment Engine...
+2023-12-22 09:43:59,525 INFO Server is listening on 172.25.225.112:38438...
+2023-12-22 09:44:33,686 INFO Connected by ('172.25.225.112', 59368)
+2023-12-22 09:44:42,145 INFO WAV file received and saved.
+2023-12-22 09:44:48,824 INFO ASR Result: ['以依偎偎']. time used 0.66.
+2023-12-22 09:44:51,034 ERROR 401 Unauthorized {
+    "error": {
+        "message": "Incorrect API key provided: sk-p0H8l***************************************4QP5. You can find your API key at https://platform.openai.com/account/api-keys.",
+        "type": "invalid_request_error",
+        "param": null,
+        "code": "invalid_api_key"
+    }
+}
+
+2023-12-22 09:44:51,039 INFO API rate limit exceeded, sending: 
+你问的太多了，我们的毛都被你撸秃了，你自己去准备一个API，或者一小时后再来吧。
+
+2023-12-22 09:44:53,114 ERROR HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /voice?text=%0A%E4%BD%A0%E9%97%AE%E7%9A%84%E5%A4%AA%E5%A4%9A%E4%BA%86%EF%BC%8C%E6%88%91%E4%BB%AC%E7%9A%84%E6%AF%9B%E9%83%BD%E8%A2%AB%E4%BD%A0%E6%92%B8%E7%A7%83%E4%BA%86%EF%BC%8C%E4%BD%A0%E8%87%AA%E5%B7%B1%E5%8E%BB%E5%87%86%E5%A4%87%E4%B8%80%E4%B8%AAAPI%EF%BC%8C%E6%88%96%E8%80%85%E4%B8%80%E5%B0%8F%E6%97%B6%E5%90%8E%E5%86%8D%E6%9D%A5%E5%90%A7%E3%80%82%0A&model_id=1&speaker_name=%E5%AE%B5%E5%AE%AB&sdp_ratio=0.2&noise=0.2&noisew=0.9&length=1&language=ZH&auto_translate=False&auto_split=True (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000016D1D5C1A30>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))
+2023-12-22 09:44:53,560 ERROR Traceback (most recent call last):
+  File "C:\experiment\Ai_project\Digital_Life_Server-master\SocketServer.py", line 116, in listen
+    for sentence in self.chat_gpt.ask_stream(ask_text):
+  File "C:\experiment\Ai_project\Digital_Life_Server-master\GPT\GPTService.py", line 82, in ask_stream
+    for data in self.chatbot.ask(asktext) if self.chatVer == 1 else self.chatbot.ask_stream(text):
+  File "C:\Users\ying\.conda\envs\Digital_Life_Server-master1\lib\site-packages\revChatGPT\V3.py", line 203, in ask_stream
+    raise t.APIConnectionError(
+revChatGPT.typings.APIConnectionError: 401 Unauthorized {
+    "error": {
+        "message": "Incorrect API key provided: sk-p0H8l***************************************4QP5. You can find your API key at https://platform.openai.com/account/api-keys.",
+        "type": "invalid_request_error",
+        "param": null,
+        "code": "invalid_api_key"
+    }
+}
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ying\.conda\envs\Digital_Life_Server-master1\lib\site-packages\urllib3\connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+  File "C:\Users\ying\.conda\envs\Digital_Life_Server-master1\lib\site-packages\urllib3\util\connection.py", line 95, in create_connection
+    raise err
+  File "C:\Users\ying\.conda\envs\Digital_Life_Server-master1\lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ying\.conda\envs\Digital_Life_Server-master1\lib\site-packages\urllib3\connectionpool.py", line 703, in urlopen
+    httplib_response = self._make_request(
+  File "C:\Users\ying\.conda\envs\Digital_Life_Server-master1\lib\site-packages\urllib3\connectionpool.py", line 398, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "C:\Users\ying\.conda\envs\Digital_Life_Server-master1\lib\site-packages\urllib3\connection.py", line 239, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "C:\Users\ying\.conda\envs\Digital_Life_Server-master1\lib\http\client.py", line 1285, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "C:\Users\ying\.conda\envs\Digital_Life_Server-master1\lib\http\client.py", line 1331, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "C:\Users\ying\.conda\envs\Digital_Life_Server-master1\lib\http\client.py", line 1280, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\ying\.conda\envs\Digital_Life_Server-master1\lib\http\client.py", line 1040, in _send_output
+    self.send(msg)
+  File "C:\Users\ying\.conda\envs\Digital_Life_Server-master1\lib\http\client.py", line 980, in send
+    self.connect()
+  File "C:\Users\ying\.conda\envs\Digital_Life_Server-master1\lib\site-packages\urllib3\connection.py", line 205, in connect
+    conn = self._new_conn()
+  File "C:\Users\ying\.conda\envs\Digital_Life_Server-master1\lib\site-packages\urllib3\connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x0000016D1D5C1A30>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ying\.conda\envs\Digital_Life_Server-master1\lib\site-packages\requests\adapters.py", line 489, in send
+    resp = conn.urlopen(
+  File "C:\Users\ying\.conda\envs\Digital_Life_Server-master1\lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "C:\Users\ying\.conda\envs\Digital_Life_Server-master1\lib\site-packages\urllib3\util\retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /voice?text=%0A%E4%BD%A0%E9%97%AE%E7%9A%84%E5%A4%AA%E5%A4%9A%E4%BA%86%EF%BC%8C%E6%88%91%E4%BB%AC%E7%9A%84%E6%AF%9B%E9%83%BD%E8%A2%AB%E4%BD%A0%E6%92%B8%E7%A7%83%E4%BA%86%EF%BC%8C%E4%BD%A0%E8%87%AA%E5%B7%B1%E5%8E%BB%E5%87%86%E5%A4%87%E4%B8%80%E4%B8%AAAPI%EF%BC%8C%E6%88%96%E8%80%85%E4%B8%80%E5%B0%8F%E6%97%B6%E5%90%8E%E5%86%8D%E6%9D%A5%E5%90%A7%E3%80%82%0A&model_id=1&speaker_name=%E5%AE%B5%E5%AE%AB&sdp_ratio=0.2&noise=0.2&noisew=0.9&length=1&language=ZH&auto_translate=False&auto_split=True (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000016D1D5C1A30>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\experiment\Ai_project\Digital_Life_Server-master\SocketServer.py", line 205, in <module>
+    s.listen()
+  File "C:\experiment\Ai_project\Digital_Life_Server-master\SocketServer.py", line 127, in listen
+    self.send_voice(GPT.tune.exceed_reply, 2)
+  File "C:\experiment\Ai_project\Digital_Life_Server-master\SocketServer.py", line 149, in send_voice
+    self.tts.read_save(resp_text, self.tmp_proc_file, self.tts.hps.data.sampling_rate)
+  File "C:\experiment\Ai_project\Digital_Life_Server-master\TTS\TTService.py", line 83, in read_save
+    self.read(text, filename)
+  File "C:\experiment\Ai_project\Digital_Life_Server-master\TTS\TTService.py", line 74, in read
+    response = requests.get(api_url, params=data)
+  File "C:\Users\ying\.conda\envs\Digital_Life_Server-master1\lib\site-packages\requests\api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "C:\Users\ying\.conda\envs\Digital_Life_Server-master1\lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\ying\.conda\envs\Digital_Life_Server-master1\lib\site-packages\requests\sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\ying\.conda\envs\Digital_Life_Server-master1\lib\site-packages\requests\sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\ying\.conda\envs\Digital_Life_Server-master1\lib\site-packages\requests\adapters.py", line 565, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=5000): Max retries exceeded with url: /voice?text=%0A%E4%BD%A0%E9%97%AE%E7%9A%84%E5%A4%AA%E5%A4%9A%E4%BA%86%EF%BC%8C%E6%88%91%E4%BB%AC%E7%9A%84%E6%AF%9B%E9%83%BD%E8%A2%AB%E4%BD%A0%E6%92%B8%E7%A7%83%E4%BA%86%EF%BC%8C%E4%BD%A0%E8%87%AA%E5%B7%B1%E5%8E%BB%E5%87%86%E5%A4%87%E4%B8%80%E4%B8%AAAPI%EF%BC%8C%E6%88%96%E8%80%85%E4%B8%80%E5%B0%8F%E6%97%B6%E5%90%8E%E5%86%8D%E6%9D%A5%E5%90%A7%E3%80%82%0A&model_id=1&speaker_name=%E5%AE%B5%E5%AE%AB&sdp_ratio=0.2&noise=0.2&noisew=0.9&length=1&language=ZH&auto_translate=False&auto_split=True (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000016D1D5C1A30>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))
+
