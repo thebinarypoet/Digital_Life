@@ -1,12 +1,12 @@
 """
 api服务 多版本多模型 fastapi实现
 """
+import os
+os.chdir('C:\\experiment\\Ai_project\\Digital_Life_Server-master\\TTS\\xg')
 import sys
 import io
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
-import os
-os.chdir('C:\\experiment\\Ai_project\\Digital_Life_Server-master\\TTS\\xg')
 import logging
 import gc
 import random
@@ -37,8 +37,7 @@ from fastapi.responses import JSONResponse
 from config import config
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
-logging.basicConfig(level=logging.INFO, encoding='utf-8')
-console_logger = logging.getLogger("console_logger")
+
 
 class Model:
     """模型封装类"""
@@ -104,15 +103,13 @@ class Models:
                 device=device,
                 language=language,
             )
-            # logger.success(f"添加模型{model_path}，使用配置文件{os.path.realpath(config_path)}")
-            logging.info(f"添加模型{model_path}，使用配置文件{os.path.realpath(config_path)}")
+            logger.success(f"添加模型{model_path}，使用配置文件{os.path.realpath(config_path)}")
         else:
             # 获取一个指向id
             m_id = next(iter(self.path2ids[model_path]))
             self.models[self.num] = self.models[m_id]
             self.path2ids[model_path].add(self.num)
-            # logger.success("模型已存在，添加模型引用。")
-            logging.info("模型已存在，添加模型引用。")
+            logger.success("模型已存在，添加模型引用。")
         # 添加角色信息
         for speaker, speaker_id in self.models[self.num].spk2id.items():
             if speaker not in self.spk_info.keys():
@@ -138,11 +135,9 @@ class Models:
         self.path2ids[model_path].remove(index)
         if len(self.path2ids[model_path]) == 0:
             self.path2ids.pop(model_path)
-            # logger.success(f"删除模型{model_path}, id = {index}")
-            logging.info(f"删除模型{model_path}, id = {index}")
+            logger.success(f"删除模型{model_path}, id = {index}")
         else:
-            # logger.success(f"删除模型引用{model_path}, id = {index}")
-            logging.info(f"删除模型引用{model_path}, id = {index}")
+            logger.success(f"删除模型引用{model_path}, id = {index}")
         # 删除模型
         self.models.pop(index)
         gc.collect()
@@ -157,7 +152,7 @@ class Models:
 
 if __name__ == "__main__":
     app = FastAPI()
-    app.logger = console_logger
+    app.logger = logger
     # 挂载静态文件
     StaticDir: str = "./Web"
     dirs = [fir.name for fir in os.scandir(StaticDir) if fir.is_dir()]
@@ -205,11 +200,8 @@ if __name__ == "__main__":
     ):
         """语音接口"""
         text = text.text
-        # logger.info(
-        #     f"{request.client.host}:{request.client.port}/voice  { unquote(str(request.query_params) )} text={text}"
-        # )
-        logging.info(
-            f"{request.client.host}:{request.client.port}/voice  {unquote(str(request.query_params))} text={text}"
+        logger.info(
+            f"{request.client.host}:{request.client.port}/voice  { unquote(str(request.query_params) )} text={text}"
         )
         # 检查模型是否存在
         if model_id not in loaded_models.models.keys():
@@ -291,7 +283,7 @@ if __name__ == "__main__":
         auto_split: bool = Query(False, description="自动切分"),
     ):
         """语音接口"""
-        logging.info(
+        logger.info(
             f"{request.client.host}:{request.client.port}/voice  { unquote(str(request.query_params) )}"
         )
         # 检查模型是否存在
@@ -369,7 +361,7 @@ if __name__ == "__main__":
         request: Request, model_id: int = Query(..., description="删除模型id")
     ):
         """删除指定模型"""
-        logging.info(
+        logger.info(
             f"{request.client.host}:{request.client.port}/models/delete  { unquote(str(request.query_params) )}"
         )
         result = loaded_models.del_model(model_id)
@@ -388,7 +380,7 @@ if __name__ == "__main__":
         language: str = Query("ZH", description="模型默认语言"),
     ):
         """添加指定模型：允许重复添加相同路径模型，且不重复占用内存"""
-        logging.info(
+        logger.info(
             f"{request.client.host}:{request.client.port}/models/add  { unquote(str(request.query_params) )}"
         )
         if config_path is None:
@@ -479,7 +471,7 @@ if __name__ == "__main__":
         request: Request, root_dir: str = Query("Data", description="搜索根目录")
     ):
         """获取未加载模型"""
-        logging.info(
+        logger.info(
             f"{request.client.host}:{request.client.port}/models/get_unloaded  { unquote(str(request.query_params) )}"
         )
         return _get_all_models(root_dir, only_unloaded=True)
@@ -489,7 +481,7 @@ if __name__ == "__main__":
         request: Request, root_dir: str = Query("Data", description="搜索根目录")
     ):
         """获取全部本地模型"""
-        logging.info(
+        logger.info(
             f"{request.client.host}:{request.client.port}/models/get_local  { unquote(str(request.query_params) )}"
         )
         return _get_all_models(root_dir, only_unloaded=False)
@@ -537,7 +529,7 @@ if __name__ == "__main__":
         to_language: str = Query(..., description="翻译目标语言"),
     ):
         """翻译"""
-        logging.info(
+        logger.info(
             f"{request.client.host}:{request.client.port}/tools/translate  { unquote(str(request.query_params) )}"
         )
         return {"texts": trans.translate(Sentence=texts, to_Language=to_language)}
@@ -553,7 +545,7 @@ if __name__ == "__main__":
         """
         获取一个随机音频+文本，用于对比，音频会从本地目录随机选择。
         """
-        logging.info(
+        logger.info(
             f"{request.client.host}:{request.client.port}/tools/random_example  { unquote(str(request.query_params) )}"
         )
         global all_examples
@@ -628,7 +620,7 @@ if __name__ == "__main__":
 
     @app.get("/tools/get_audio")
     def get_audio(request: Request, path: str = Query(..., description="本地音频路径")):
-        logging.info(
+        logger.info(
             f"{request.client.host}:{request.client.port}/tools/get_audio  { unquote(str(request.query_params) )}"
         )
         if not os.path.isfile(path):
@@ -641,14 +633,14 @@ if __name__ == "__main__":
     @app.get("/models/get_ids")
     def get_model_ids(request: Request):
         """获取所有加载模型的ID"""
-        logging.info(
+        logger.info(
             f"{request.client.host}:{request.client.port}/models/get_ids  {unquote(str(request.query_params))}"
         )
         model_ids = list(loaded_models.models.keys())
         return JSONResponse(content={"model_ids": model_ids})
 
-    logging.warning("本地服务，请勿将服务端口暴露于外网")
-    logging.info(f"api文档地址 http://127.0.0.1:{config.server_config.port}/docs")
+    logger.warning("本地服务，请勿将服务端口暴露于外网")
+    logger.info(f"api文档地址 http://127.0.0.1:{config.server_config.port}/docs")
     # webbrowser.open(f"http://127.0.0.1:{config.server_config.port}")
     uvicorn.run(
         app, port=config.server_config.port, host="0.0.0.0", log_level="warning"
